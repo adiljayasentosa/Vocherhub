@@ -1,0 +1,331 @@
+/* VoucherHub - Shared styles (Tailwind CDN handles utilities; this file covers
+   tokens & components that are easier to keep consistent in plain CSS) */
+
+:root{
+  --green-50:  #f0fdf4;
+  --green-100: #dcfce7;
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --green-800: #14532d;
+  --green-900: #0f3d24;
+  --ink-900: #0f172a;
+  --ink-700: #334155;
+  --ink-500: #64748b;
+  --ink-400: #94a3b8;
+  --line: #e5e7eb;
+  --card-shadow: 0 1px 2px rgba(15,23,42,.04), 0 8px 24px -12px rgba(15,23,42,.10);
+}
+
+*{ -webkit-font-smoothing: antialiased; }
+html{ scroll-behavior: smooth; }
+body{
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink-900);
+  background: #f8fafc;
+}
+
+/* ---------- Reusable primitives ---------- */
+.vh-card{
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+}
+
+.vh-btn{
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  border-radius: 12px; font-weight: 600; font-size: .9375rem;
+  padding: .75rem 1.5rem; transition: all .15s ease; white-space: nowrap;
+}
+.vh-btn-primary{ background: var(--green-700); color: #fff; }
+.vh-btn-primary:hover{ background: var(--green-800); }
+.vh-btn-secondary{ background: #fff; color: var(--ink-900); border: 1px solid var(--line); }
+.vh-btn-secondary:hover{ background: #f8fafc; }
+.vh-btn-white{ background: #fff; color: var(--green-800); }
+.vh-btn-white:hover{ background: #f0fdf4; }
+
+.vh-badge-pill{
+  display:inline-flex; align-items:center; gap:.5rem;
+  background: var(--green-100); color: var(--green-800);
+  font-size:.75rem; font-weight:700; letter-spacing:.02em;
+  padding:.4rem .9rem; border-radius:999px;
+}
+
+.vh-icon-badge{
+  width:44px; height:44px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+
+.vh-trend-up{ color:#16a34a; }
+.vh-trend-down{ color:#dc2626; }
+
+/* Sidebar */
+.vh-sidebar-link{
+  display:flex; align-items:center; gap:.75rem;
+  padding:.65rem .875rem; border-radius:10px;
+  color: var(--ink-700); font-size:.875rem; font-weight:500;
+  transition: background .12s ease, color .12s ease;
+}
+.vh-sidebar-link:hover{ background:#f1f5f9; }
+.vh-sidebar-link.active{
+  background: var(--green-700); color:#fff; font-weight:600;
+}
+.vh-sidebar-link.active svg{ color:#fff; }
+.vh-sidebar-link svg{ width:18px; height:18px; color: var(--ink-500); flex-shrink:0; }
+.vh-sidebar-link.active .chev{ opacity:.85; }
+
+/* Feature / fitur cards */
+.vh-feature-card{
+  border:1px solid var(--line); border-radius:16px; background:#fff;
+  padding:1.25rem; transition: box-shadow .15s ease, transform .15s ease;
+}
+.vh-feature-card:hover{ box-shadow: var(--card-shadow); transform: translateY(-2px); }
+
+/* Table */
+.vh-table th{
+  font-size:.75rem; text-transform:none; color:var(--ink-500); font-weight:600;
+  text-align:left; padding:.6rem .9rem; border-bottom:1px solid var(--line);
+}
+.vh-table td{
+  font-size:.875rem; padding:.7rem .9rem; border-bottom:1px solid #f1f5f9; color: var(--ink-900);
+}
+.vh-status-pill{
+  display:inline-flex; align-items:center; padding:.2rem .65rem; border-radius:999px;
+  font-size:.75rem; font-weight:600; background:#dcfce7; color:#15803d;
+}
+
+/* Chart containers need explicit height for Chart.js */
+.vh-chart-box{ position:relative; width:100%; height:220px; }
+.vh-chart-box-sm{ position:relative; width:100%; height:180px; }
+
+/* Scrollbar polish (optional, non-critical) */
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:8px; }
+
+/* Utility: line-clamp fallback not needed here */
+
+/* Login page illustration panel */
+.vh-security-panel{
+  background: radial-gradient(circle at 50% 35%, #ecfdf5 0%, #f0fdf4 55%, #f7fdf9 100%);
+}
+
+/* Focus visibility for a11y */
+a:focus-visible, button:focus-visible, input:focus-visible{
+  outline: 2px solid var(--green-600); outline-offset: 2px;
+}
+
+@media (max-width: 1023px){
+  .vh-chart-box{ height: 200px; }
+}
+
+/* =========================================================================
+   Landing-page-only components (added for the public landing page redesign)
+   These are additive and don't touch anything dashboard.html/login.html use.
+   ========================================================================= */
+
+.vh-eyebrow{
+  display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color: var(--green-700); margin-bottom:.6rem;
+}
+.vh-eyebrow-rule{
+  width:36px; height:3px; border-radius:999px; background: var(--green-600);
+  margin:.6rem auto 0;
+}
+
+.vh-bg-mint{ background: linear-gradient(180deg,#f4fbf6 0%, #eefaf1 100%); }
+.vh-bg-dot{
+  background-image: radial-gradient(circle, rgba(22,163,74,.14) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+@keyframes vh-float{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-10px); }
+}
+.vh-floaty{ animation: vh-float 6s ease-in-out infinite; }
+.vh-floaty-slow{ animation: vh-float 8s ease-in-out infinite; animation-delay:.5s; }
+@media (prefers-reduced-motion: reduce){
+  .vh-floaty, .vh-floaty-slow{ animation: none; }
+}
+
+.vh-blob{
+  position:absolute; border-radius:9999px; filter: blur(2px);
+  background: radial-gradient(circle at 30% 30%, rgba(22,163,74,.16), rgba(22,163,74,.03));
+  pointer-events:none;
+}
+
+/* Floating statistic bar that overlaps the hero */
+.vh-float-panel{
+  background:#fff; border:1px solid var(--line); border-radius:20px;
+  box-shadow: 0 20px 45px -20px rgba(15,23,42,.18);
+}
+.vh-stat-chip{
+  display:flex; align-items:center; gap:.75rem;
+}
+
+/* Workflow / alur kerja */
+.vh-workflow-icon{
+  width:64px; height:64px; border-radius:9999px; background:#fff;
+  border:1px solid var(--line); box-shadow: var(--card-shadow);
+  display:flex; align-items:center; justify-content:center; position:relative; z-index:10;
+}
+.vh-workflow-track{
+  position:absolute; top:32px; left:0; right:0; height:2px;
+  background-image: linear-gradient(to right, var(--ink-400) 0 6px, transparent 6px 12px);
+  background-size: 12px 2px; background-repeat: repeat-x;
+  z-index:1;
+}
+
+/* Platform tiles */
+.vh-tile{
+  border:1px solid var(--line); border-radius:14px; background:#fff;
+  padding:1rem .75rem; text-align:center; transition: box-shadow .15s ease, border-color .15s ease;
+}
+.vh-tile:hover{ box-shadow: var(--card-shadow); border-color: transparent; }
+
+/* Dashboard preview floating info cards */
+.vh-preview-card{
+  position:absolute; display:flex; align-items:center; gap:.6rem;
+  background:#fff; border:1px solid var(--line); border-radius:14px;
+  padding:.65rem .9rem; box-shadow: 0 16px 32px -16px rgba(15,23,42,.22);
+  font-size:.8125rem; white-space:nowrap;
+}
+
+/* FAQ accordion */
+.vh-faq-item{ border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden; }
+.vh-faq-q{
+  width:100%; display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; padding:1.1rem 1.25rem; text-align:left; font-weight:600; font-size:.9375rem;
+}
+.vh-faq-q .vh-faq-chevron{ transition: transform .2s ease; color: var(--ink-500); flex-shrink:0; }
+.vh-faq-item[data-open="true"] .vh-faq-chevron{ transform: rotate(180deg); }
+.vh-faq-a{
+  max-height:0; overflow:hidden; transition: max-height .25s ease, padding .25s ease;
+  padding:0 1.25rem; color: var(--ink-500); font-size:.875rem; line-height:1.6;
+}
+.vh-faq-item[data-open="true"] .vh-faq-a{ padding-bottom:1.1rem; }
+
+/* "Why choose us" premium cards */
+.vh-why-card{
+  border:1px solid var(--line); border-radius:18px; background:#fff; padding:1.5rem;
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.vh-why-card:hover{ box-shadow: var(--card-shadow); transform: translateY(-3px); }
+
+/* =========================================================================
+   Shared app-shell + design-system components (Phase 2.1 feature pages)
+   Additive only — nothing here changes classes the Landing/Login/Dashboard
+   pages already rely on.
+   ========================================================================= */
+
+/* Breadcrumb */
+.vh-breadcrumb{ display:flex; align-items:center; gap:.4rem; font-size:.8125rem; color: var(--ink-500); }
+.vh-breadcrumb a{ color: var(--ink-500); }
+.vh-breadcrumb a:hover{ color: var(--green-700); }
+.vh-breadcrumb .sep{ color: var(--ink-400); }
+.vh-breadcrumb .current{ color: var(--ink-900); font-weight:600; }
+
+/* Tabs (used by Keuangan / Presensi / Pengaturan) */
+.vh-tabs{ display:flex; gap:.25rem; border-bottom:1px solid var(--line); overflow-x:auto; }
+.vh-tab{
+  padding:.7rem 1rem; font-size:.875rem; font-weight:600; color: var(--ink-500);
+  border-bottom:2px solid transparent; white-space:nowrap; flex-shrink:0;
+}
+.vh-tab.active{ color: var(--green-700); border-bottom-color: var(--green-600); }
+.vh-tab:hover:not(.active){ color: var(--ink-900); }
+
+/* Badges (status pills, role pills, severity pills) */
+.vh-badge{
+  display:inline-flex; align-items:center; gap:.3rem; padding:.2rem .65rem;
+  border-radius:999px; font-size:.75rem; font-weight:600; white-space:nowrap;
+}
+.vh-badge-green{ background:#dcfce7; color:#15803d; }
+.vh-badge-red{ background:#fee2e2; color:#b91c1c; }
+.vh-badge-amber{ background:#fef3c7; color:#b45309; }
+.vh-badge-blue{ background:#dbeafe; color:#1d4ed8; }
+.vh-badge-slate{ background:#f1f5f9; color:#475569; }
+
+/* Inputs / selects shared across all forms */
+.vh-input, .vh-select{
+  width:100%; border:1px solid var(--line); border-radius:10px;
+  padding:.6rem .85rem; font-size:.875rem; outline:none; background:#fff;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.vh-input:focus, .vh-select:focus{ border-color: var(--green-600); box-shadow:0 0 0 3px rgba(22,163,74,.12); }
+.vh-label{ display:block; font-size:.8125rem; font-weight:600; margin-bottom:.35rem; }
+.vh-label .req{ color:#dc2626; }
+.vh-helper{ font-size:.75rem; color: var(--ink-500); margin-top:.3rem; }
+.vh-field-error{ font-size:.75rem; color:#dc2626; margin-top:.3rem; display:none; }
+.vh-field.invalid .vh-input, .vh-field.invalid .vh-select{ border-color:#dc2626; }
+.vh-field.invalid .vh-field-error{ display:block; }
+
+/* Search + filter bar */
+.vh-search-wrap{ position:relative; flex:1; min-width:0; }
+.vh-search-wrap svg, .vh-search-wrap i{ position:absolute; left:.75rem; top:50%; transform:translateY(-50%); color: var(--ink-400); }
+.vh-search-wrap .vh-input{ padding-left:2.25rem; }
+
+/* Table toolbar row actions */
+.vh-row-action{
+  width:32px; height:32px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center;
+  color: var(--ink-500); transition: background .12s ease, color .12s ease;
+}
+.vh-row-action:hover{ background:#f1f5f9; color: var(--ink-900); }
+.vh-row-action.danger:hover{ background:#fef2f2; color:#dc2626; }
+
+/* Pagination */
+.vh-pagination{ display:flex; align-items:center; gap:.35rem; }
+.vh-page-btn{
+  min-width:32px; height:32px; padding:0 .5rem; border-radius:8px; font-size:.8125rem; font-weight:600;
+  color: var(--ink-500); display:inline-flex; align-items:center; justify-content:center;
+}
+.vh-page-btn:hover{ background:#f1f5f9; }
+.vh-page-btn.active{ background: var(--green-700); color:#fff; }
+.vh-page-btn:disabled{ opacity:.4; cursor:not-allowed; }
+
+/* Empty state */
+.vh-empty{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:3rem 1rem; color: var(--ink-500); }
+.vh-empty .vh-icon-badge{ width:56px; height:56px; margin-bottom:1rem; }
+
+/* Skeleton loading */
+@keyframes vh-shimmer{ 0%{ background-position: -200px 0; } 100%{ background-position: calc(200px + 100%) 0; } }
+.vh-skeleton{
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 37%, #f1f5f9 63%);
+  background-size: 400px 100%; animation: vh-shimmer 1.4s ease-in-out infinite;
+  border-radius:6px;
+}
+
+/* Modal */
+.vh-modal-overlay{
+  position:fixed; inset:0; background:rgba(15,23,42,.5); z-index:100;
+  display:flex; align-items:center; justify-content:center; padding:1rem;
+  opacity:0; pointer-events:none; transition: opacity .15s ease;
+}
+.vh-modal-overlay.open{ opacity:1; pointer-events:auto; }
+.vh-modal{
+  background:#fff; border-radius:18px; width:100%; max-width:480px; max-height:90vh; overflow-y:auto;
+  box-shadow: 0 30px 60px -20px rgba(15,23,42,.35); transform: translateY(8px) scale(.98); transition: transform .15s ease;
+}
+.vh-modal-overlay.open .vh-modal{ transform: translateY(0) scale(1); }
+.vh-modal-header{ display:flex; align-items:center; justify-content:space-between; padding:1.25rem 1.25rem 0; }
+.vh-modal-body{ padding:1.25rem; }
+.vh-modal-footer{ padding:0 1.25rem 1.25rem; display:flex; gap:.6rem; justify-content:flex-end; }
+.vh-modal-close{ color: var(--ink-400); }
+.vh-modal-close:hover{ color: var(--ink-900); }
+
+/* Toast */
+.vh-toast-container{ position:fixed; top:1rem; right:1rem; z-index:200; display:flex; flex-direction:column; gap:.6rem; }
+.vh-toast{
+  display:flex; align-items:center; gap:.6rem; background:#fff; border:1px solid var(--line); border-radius:12px;
+  padding:.75rem 1rem; box-shadow: var(--card-shadow); font-size:.875rem; min-width:260px;
+  animation: vh-toast-in .2s ease;
+}
+@keyframes vh-toast-in{ from{ opacity:0; transform:translateX(12px); } to{ opacity:1; transform:translateX(0); } }
+.vh-toast.success{ border-left:3px solid #16a34a; }
+.vh-toast.error{ border-left:3px solid #dc2626; }
+
+/* Low stock warning banner */
+.vh-alert-banner{
+  display:flex; align-items:flex-start; gap:.6rem; border-radius:12px; padding:.85rem 1rem; font-size:.8125rem;
+}
+.vh-alert-amber{ background:#fffbeb; border:1px solid #fde68a; color:#92400e; }
+.vh-alert-blue{ background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; }

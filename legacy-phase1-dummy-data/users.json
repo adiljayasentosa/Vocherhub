@@ -1,0 +1,13 @@
+{
+  "currentUser": {
+    "name": "Admin Sekolah",
+    "role": "Administrator",
+    "avatarInitials": "AS"
+  },
+  "users": [
+    { "name": "Admin Sekolah", "role": "Administrator", "username": "admin" },
+    { "name": "Budi", "role": "Operator", "username": "budi" },
+    { "name": "Siti", "role": "Operator", "username": "siti" },
+    { "name": "Andi", "role": "Operator", "username": "andi" }
+  ]
+}

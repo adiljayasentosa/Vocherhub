@@ -1,0 +1,197 @@
+rules_version = '2';
+
+// =============================================================================
+// VoucherHub — Firestore Security Rules
+// =============================================================================
+//
+// IMPORTANT CONTEXT — read before changing anything below:
+//
+// 1. The VoucherHub frontend never talks to Firestore directly. It only
+//    uses the Firebase Auth client SDK to sign in and get an ID token
+//    (public/js/login.js), which the Express backend immediately exchanges
+//    for an httpOnly session cookie. Every single read/write in this app
+//    — vouchers, sales, finance, attendance, settings, everything — goes
+//    through the Express API (routes/ -> controllers/ -> services/), which
+//    uses the Firebase ADMIN SDK.
+//
+// 2. The Admin SDK bypasses these rules entirely. That means:
+//      - These rules are NOT what enforces this app's day-to-day
+//        authorization. requireAuth + requireRole('admin') in
+//        middlewares/, checked on every route, are what actually do that.
+//      - These rules exist as a defense-in-depth backstop: if a Firebase
+//        Auth ID token ever leaks or a client is modified to call
+//        Firestore directly, this is what stops it from reading/writing
+//        data outside the Express API's validated, transactional logic.
+//
+// 3. Because of (1) and (2), WRITES are denied here for every collection.
+//    The real write paths (atomic voucher-sale transactions, sequential
+//    voucher-code counters, Firebase Auth account provisioning on user
+//    create, self-demote/self-delete guards, etc.) all rely on
+//    server-side logic and multi-step transactions that cannot be safely
+//    or completely re-implemented as declarative rules. Rather than write
+//    partial rules that could be bypassed or that drift out of sync with
+//    services/*.js over time, direct client writes are simply not
+//    permitted — matching how the app actually works today.
+//
+// 4. READS are scoped by role to match the same posture the Express RBAC
+//    layer already enforces (see middlewares/rbac.js and routes/*):
+//      - systemLogs and backups are admin-only in the app (IPs,
+//        login-failure detail, and full data snapshots respectively) ->
+//        admin-only here too.
+//      - Everything else used day-to-day by both Admin and Operator in
+//        the app is readable by any signed-in, active user.
+//      - counters/vouchers is purely an internal implementation detail
+//        (collision-free sequence generator) with no legitimate reason
+//        for a client to ever read or write it -> fully denied.
+//
+// Verify the real schema in SCHEMA.md before extending these rules if the
+// app's collections change.
+// =============================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------------------------------------------------------------------
+    // Helpers
+    // ---------------------------------------------------------------------
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Mirrors middlewares/auth.js: a user document must exist and not be
+    // explicitly deactivated. Missing `active` field is treated as active,
+    // same default the backend uses (userData.active === false).
+    function currentUserDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function isActiveUser() {
+      return isSignedIn()
+        && currentUserDoc().data.active != false;
+    }
+
+    function currentRole() {
+      return currentUserDoc().data.role;
+    }
+
+    function isAdmin() {
+      return isActiveUser() && currentRole() == 'admin';
+    }
+
+    // Any authenticated, active staff member (Admin or Operator) — the
+    // default posture for operational modules used day-to-day by both
+    // roles (Voucher, Sales, Inventory, Finance, Attendance, Reports).
+    function isStaff() {
+      return isActiveUser();
+    }
+
+    // ---------------------------------------------------------------------
+    // users/{uid} — Phase 2 collection, extended by User Management (#8)
+    // ---------------------------------------------------------------------
+    match /users/{uid} {
+      // A user can read their own profile; admins can read any profile
+      // (User Management module lists/edits all staff).
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      // All writes go through userService.js (Auth account provisioning,
+      // self-demote/self-delete guards, etc.) — never direct from a client.
+      allow write: if false;
+    }
+
+    // ---------------------------------------------------------------------
+    // counters/vouchers — internal sequence generator, no client use case
+    // ---------------------------------------------------------------------
+    match /counters/{counterId} {
+      allow read, write: if false;
+    }
+
+    // ---------------------------------------------------------------------
+    // Voucher Management (#1) + Sales (#2) + Inventory (#3)
+    // ---------------------------------------------------------------------
+    match /vouchers/{voucherId} {
+      allow read: if isStaff();
+      // Creation reserves a counters/vouchers block + writes a batch;
+      // selling flips status inside a cross-collection transaction with
+      // sales/{saleId}. Both must stay server-side.
+      allow write: if false;
+    }
+
+    match /sales/{saleId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    match /stockMovements/{movementId} {
+      allow read: if isStaff();
+      allow write: if false; // written only via stockMovementService.record()
+    }
+
+    // ---------------------------------------------------------------------
+    // Finance (#4)
+    // ---------------------------------------------------------------------
+    match /finance/{entryId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    // ---------------------------------------------------------------------
+    // Attendance (#5) + Weekly Attendance Generator (#6)
+    // ---------------------------------------------------------------------
+    match /members/{memberId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    match /attendanceRecords/{recordId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    match /weeklyGenerations/{genId} {
+      allow read: if isStaff();
+      allow write: if false; // additive/idempotent generation logic lives server-side
+    }
+
+    // ---------------------------------------------------------------------
+    // Settings (#9)
+    // ---------------------------------------------------------------------
+    match /schoolInfo/{docId} {
+      allow read: if isStaff();
+      allow write: if false; // admin-only in the app; still server-validated
+    }
+
+    match /voucherPackages/{packageId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    match /systemSettings/{docId} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
+    match /backups/{backupId} {
+      // Full JSON snapshot of every collection — same admin-only posture
+      // as routes/settingsRoutes.js (requireRole('admin')).
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // ---------------------------------------------------------------------
+    // System Logs (#10)
+    // ---------------------------------------------------------------------
+    match /systemLogs/{logId} {
+      // Admin-only in the app: IPs and login-failure detail are sensitive
+      // (see routes/systemLogsRoutes.js).
+      allow read: if isAdmin();
+      allow write: if false; // written only via logService.log()
+    }
+
+    // ---------------------------------------------------------------------
+    // Default deny — anything not explicitly listed above.
+    // ---------------------------------------------------------------------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

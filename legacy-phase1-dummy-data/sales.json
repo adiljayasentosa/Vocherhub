@@ -1,0 +1,9 @@
+{
+  "transactions": [
+    { "waktu": "3 Jun 2024, 10:15", "kode": "VCH-20240603-0045", "nominal": 10000, "operator": "Budi", "metode": "Tunai", "status": "Selesai" },
+    { "waktu": "3 Jun 2024, 10:10", "kode": "VCH-20240603-0044", "nominal": 5000, "operator": "Siti", "metode": "Tunai", "status": "Selesai" },
+    { "waktu": "3 Jun 2024, 09:45", "kode": "VCH-20240603-0043", "nominal": 10000, "operator": "Andi", "metode": "Tunai", "status": "Selesai" },
+    { "waktu": "3 Jun 2024, 09:30", "kode": "VCH-20240603-0042", "nominal": 5000, "operator": "Budi", "metode": "Tunai", "status": "Selesai" },
+    { "waktu": "3 Jun 2024, 09:15", "kode": "VCH-20240603-0041", "nominal": 10000, "operator": "Siti", "metode": "Tunai", "status": "Selesai" }
+  ]
+}

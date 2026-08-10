@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoucherHub - Administrasi Voucher Wifi SMK IBG 3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="bg-white text-slate-900">
+
+  <!-- ============ NAVBAR (unchanged) ============ -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 font-bold text-lg">
+        <i data-lucide="wifi" class="text-green-600" style="width:22px;height:22px"></i>
+        <span>VoucherHub</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <a href="#beranda" class="hover:text-green-700">Beranda</a>
+        <a href="#fitur" class="hover:text-green-700">Fitur</a>
+        <a href="#tentang" class="hover:text-green-700">Tentang</a>
+        <a href="#kontak" class="hover:text-green-700">Kontak</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-3">
+        <a href="login.html" class="vh-btn vh-btn-secondary !py-2 !px-4 text-sm">Masuk Akun</a>
+        <a href="login.html" class="vh-btn vh-btn-primary !py-2 !px-4 text-sm">Masuk ke Dashboard</a>
+      </div>
+
+      <button class="md:hidden" aria-label="Buka menu" id="mobileMenuBtn">
+        <i data-lucide="menu" style="width:24px;height:24px"></i>
+      </button>
+    </div>
+
+    <!-- Mobile nav panel -->
+    <div id="mobileMenuPanel" class="hidden md:hidden border-t border-slate-100 px-5 py-4 space-y-3 text-sm font-medium text-slate-700">
+      <a href="#beranda" class="block">Beranda</a>
+      <a href="#fitur" class="block">Fitur</a>
+      <a href="#tentang" class="block">Tentang</a>
+      <a href="#kontak" class="block">Kontak</a>
+      <a href="login.html" class="block vh-btn vh-btn-secondary text-center !py-2">Masuk Akun</a>
+      <a href="login.html" class="block vh-btn vh-btn-primary text-center !py-2">Masuk ke Dashboard</a>
+    </div>
+  </header>
+
+  <!-- ============ 1. HERO ============ -->
+  <section id="beranda" class="relative overflow-hidden pt-14 lg:pt-20 pb-16 lg:pb-24">
+    <div class="vh-blob vh-floaty-slow w-72 h-72 -top-10 -left-24"></div>
+    <div class="vh-blob vh-floaty w-56 h-56 top-24 -right-16"></div>
+
+    <div class="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="vh-badge-pill mb-5">
+          <i data-lucide="radio" style="width:14px;height:14px"></i>
+          SISTEM ADMINISTRASI VOUCHER WIFI SEKOLAH
+        </span>
+        <h1 class="text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-slate-900">
+          Website Administrasi Voucher Wifi <span class="text-green-600">SMK IBG 3</span>
+        </h1>
+        <p class="text-slate-500 mt-5 max-w-md">
+          Kelola voucher, penjualan, presensi, keuangan, dan laporan sekolah dalam satu
+          platform yang mudah, cepat, dan aman.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="login.html" class="vh-btn vh-btn-primary">
+            <i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>
+            Masuk ke Dashboard
+          </a>
+          <a href="login.html" class="vh-btn vh-btn-secondary">
+            <i data-lucide="user" style="width:18px;height:18px"></i>
+            Masuk Akun
+          </a>
+        </div>
+      </div>
+
+      <!-- Dashboard mockup (kept from approved hero, with subtle floating decoration) -->
+      <div class="relative flex justify-center lg:justify-end select-none" aria-hidden="true">
+        <div class="relative w-full max-w-md">
+          <div class="vh-blob w-24 h-24 -top-8 left-6 vh-floaty"></div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white shadow-2xl p-3 rotate-[-2deg] relative z-10">
+            <div class="flex items-center gap-1.5 mb-2 px-1">
+              <span class="w-2 h-2 rounded-full bg-red-300"></span>
+              <span class="w-2 h-2 rounded-full bg-amber-300"></span>
+              <span class="w-2 h-2 rounded-full bg-green-300"></span>
+            </div>
+            <div class="rounded-lg bg-slate-50 p-3 grid grid-cols-3 gap-2">
+              <div class="col-span-1 space-y-2">
+                <div class="h-3 w-3/4 rounded bg-green-200"></div>
+                <div class="h-2 w-full rounded bg-slate-200"></div>
+                <div class="h-2 w-full rounded bg-slate-200"></div>
+                <div class="h-2 w-2/3 rounded bg-slate-200"></div>
+              </div>
+              <div class="col-span-2 space-y-2">
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="h-10 rounded-md bg-white border border-slate-200"></div>
+                  <div class="h-10 rounded-md bg-white border border-slate-200"></div>
+                </div>
+                <div class="h-16 rounded-md bg-white border border-slate-200 flex items-end p-2 gap-1">
+                  <div class="w-1.5 bg-green-300 rounded-sm" style="height:40%"></div>
+                  <div class="w-1.5 bg-green-400 rounded-sm" style="height:70%"></div>
+                  <div class="w-1.5 bg-green-300 rounded-sm" style="height:30%"></div>
+                  <div class="w-1.5 bg-green-500 rounded-sm" style="height:90%"></div>
+                  <div class="w-1.5 bg-green-300 rounded-sm" style="height:55%"></div>
+                  <div class="w-1.5 bg-green-400 rounded-sm" style="height:65%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="h-3 bg-slate-200 rounded-b-2xl mx-6 rotate-[-2deg] relative z-10"></div>
+
+          <!-- phone -->
+          <div class="absolute -bottom-6 -right-2 lg:-right-8 w-24 rounded-xl border border-slate-200 bg-white shadow-xl p-2 rotate-[4deg] z-20 vh-floaty">
+            <div class="h-2 w-8 mx-auto rounded-full bg-slate-100 mb-2"></div>
+            <div class="space-y-1.5">
+              <div class="h-2 w-full rounded bg-green-200"></div>
+              <div class="h-8 w-full rounded bg-slate-100"></div>
+              <div class="h-2 w-2/3 rounded bg-slate-200"></div>
+            </div>
+          </div>
+
+          <!-- wifi badge -->
+          <div class="absolute -top-4 -right-3 lg:-right-6 w-14 h-14 rounded-2xl bg-green-600 shadow-lg flex items-center justify-center rotate-[8deg] z-20 vh-floaty-slow">
+            <i data-lucide="wifi" class="text-white" style="width:26px;height:26px"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 2. FLOATING STATISTICS ============ -->
+    <div class="relative z-10 max-w-6xl mx-auto px-5 lg:px-8 -mt-2 lg:mt-6">
+      <div class="vh-float-panel px-6 py-6 lg:py-7 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+        <div class="vh-stat-chip">
+          <div class="vh-icon-badge bg-green-50"><i data-lucide="ticket" class="text-green-600" style="width:20px;height:20px"></i></div>
+          <div><p class="text-xl font-extrabold leading-none">500+</p><p class="text-xs text-slate-500 mt-1">Voucher Terjual</p></div>
+        </div>
+        <div class="vh-stat-chip">
+          <div class="vh-icon-badge bg-blue-50"><i data-lucide="activity" class="text-blue-600" style="width:20px;height:20px"></i></div>
+          <div><p class="text-xl font-extrabold leading-none">99.9%</p><p class="text-xs text-slate-500 mt-1">Uptime Sistem</p></div>
+        </div>
+        <div class="vh-stat-chip">
+          <div class="vh-icon-badge bg-violet-50"><i data-lucide="shield-check" class="text-violet-600" style="width:20px;height:20px"></i></div>
+          <div><p class="text-xl font-extrabold leading-none">100%</p><p class="text-xs text-slate-500 mt-1">Data Aman</p></div>
+        </div>
+        <div class="vh-stat-chip">
+          <div class="vh-icon-badge bg-amber-50"><i data-lucide="clock" class="text-amber-600" style="width:20px;height:20px"></i></div>
+          <div><p class="text-xl font-extrabold leading-none">24/7</p><p class="text-xs text-slate-500 mt-1">Siap Digunakan</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. MAIN FEATURES ============ -->
+  <section id="fitur" class="max-w-7xl mx-auto px-5 lg:px-8 pt-20 pb-16 text-center">
+    <span class="vh-eyebrow">Fitur Utama</span>
+    <h2 class="text-2xl lg:text-3xl font-extrabold">Semua Fitur yang Anda Butuhkan</h2>
+    <p class="text-slate-500 mt-3 max-w-lg mx-auto">Dirancang khusus untuk memudahkan pengelolaan voucher wifi sekolah Anda.</p>
+    <div class="vh-eyebrow-rule"></div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 text-left">
+      <div class="vh-feature-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="ticket" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Manajemen Voucher</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Buat, kelola, dan pantau stok voucher dengan mudah dan cepat.</p>
+      </div>
+      <div class="vh-feature-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="shopping-cart" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Penjualan</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Catat transaksi penjualan secara langsung dan akurat.</p>
+      </div>
+      <div class="vh-feature-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="user-check" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Presensi</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Pantau kehadiran anggota dengan sistem presensi otomatis.</p>
+      </div>
+      <div class="vh-feature-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="wallet-2" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Keuangan</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Kelola pemasukan, pengeluaran, dan saldo dengan rapi.</p>
+      </div>
+      <div class="vh-feature-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="file-bar-chart" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Laporan</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Export laporan ke PDF &amp; Excel, siap cetak kapan saja.</p>
+      </div>
+      <div class="vh-feature-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="layout-dashboard" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Dashboard</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Pantau semua aktivitas dalam dashboard yang informatif.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. WORKFLOW ============ -->
+  <section class="vh-bg-mint py-20">
+    <div class="max-w-6xl mx-auto px-5 lg:px-8 text-center">
+      <span class="vh-eyebrow">Cara Kerja</span>
+      <h2 class="text-2xl lg:text-3xl font-extrabold">Alur Kerja VoucherHub</h2>
+      <div class="vh-eyebrow-rule"></div>
+
+      <!-- Desktop: horizontal connected steps -->
+      <div class="hidden lg:grid grid-cols-5 gap-4 mt-14 relative">
+        <div class="vh-workflow-track"></div>
+        <div>
+          <div class="vh-workflow-icon mx-auto"><i data-lucide="file-plus-2" class="text-green-600" style="width:24px;height:24px"></i></div>
+          <h3 class="font-semibold mt-4 text-sm">Generate Voucher</h3>
+          <p class="text-xs text-slate-500 mt-1 px-2">Buat voucher dalam jumlah banyak sesuai kebutuhan.</p>
+        </div>
+        <div>
+          <div class="vh-workflow-icon mx-auto"><i data-lucide="ticket" class="text-green-600" style="width:24px;height:24px"></i></div>
+          <h3 class="font-semibold mt-4 text-sm">Kelola Voucher</h3>
+          <p class="text-xs text-slate-500 mt-1 px-2">Pantau stok dan status voucher secara real-time.</p>
+        </div>
+        <div>
+          <div class="vh-workflow-icon mx-auto"><i data-lucide="shopping-cart" class="text-green-600" style="width:24px;height:24px"></i></div>
+          <h3 class="font-semibold mt-4 text-sm">Penjualan</h3>
+          <p class="text-xs text-slate-500 mt-1 px-2">Jual voucher ke anggota dan catat transaksinya.</p>
+        </div>
+        <div>
+          <div class="vh-workflow-icon mx-auto"><i data-lucide="wallet" class="text-green-600" style="width:24px;height:24px"></i></div>
+          <h3 class="font-semibold mt-4 text-sm">Keuangan Otomatis</h3>
+          <p class="text-xs text-slate-500 mt-1 px-2">Pemasukan dan saldo terupdate otomatis.</p>
+        </div>
+        <div>
+          <div class="vh-workflow-icon mx-auto"><i data-lucide="file-check-2" class="text-green-600" style="width:24px;height:24px"></i></div>
+          <h3 class="font-semibold mt-4 text-sm">Laporan PDF</h3>
+          <p class="text-xs text-slate-500 mt-1 px-2">Unduh laporan lengkap kapan saja dibutuhkan.</p>
+        </div>
+      </div>
+
+      <!-- Mobile: vertical timeline -->
+      <div class="lg:hidden mt-10 space-y-8 text-left max-w-sm mx-auto">
+        <div class="flex gap-4">
+          <div class="vh-workflow-icon !w-12 !h-12 shrink-0"><i data-lucide="file-plus-2" class="text-green-600" style="width:18px;height:18px"></i></div>
+          <div class="pt-1"><h3 class="font-semibold text-sm">Generate Voucher</h3><p class="text-xs text-slate-500 mt-1">Buat voucher dalam jumlah banyak sesuai kebutuhan.</p></div>
+        </div>
+        <div class="flex gap-4">
+          <div class="vh-workflow-icon !w-12 !h-12 shrink-0"><i data-lucide="ticket" class="text-green-600" style="width:18px;height:18px"></i></div>
+          <div class="pt-1"><h3 class="font-semibold text-sm">Kelola Voucher</h3><p class="text-xs text-slate-500 mt-1">Pantau stok dan status voucher secara real-time.</p></div>
+        </div>
+        <div class="flex gap-4">
+          <div class="vh-workflow-icon !w-12 !h-12 shrink-0"><i data-lucide="shopping-cart" class="text-green-600" style="width:18px;height:18px"></i></div>
+          <div class="pt-1"><h3 class="font-semibold text-sm">Penjualan</h3><p class="text-xs text-slate-500 mt-1">Jual voucher ke anggota dan catat transaksinya.</p></div>
+        </div>
+        <div class="flex gap-4">
+          <div class="vh-workflow-icon !w-12 !h-12 shrink-0"><i data-lucide="wallet" class="text-green-600" style="width:18px;height:18px"></i></div>
+          <div class="pt-1"><h3 class="font-semibold text-sm">Keuangan Otomatis</h3><p class="text-xs text-slate-500 mt-1">Pemasukan dan saldo terupdate otomatis.</p></div>
+        </div>
+        <div class="flex gap-4">
+          <div class="vh-workflow-icon !w-12 !h-12 shrink-0"><i data-lucide="file-check-2" class="text-green-600" style="width:18px;height:18px"></i></div>
+          <div class="pt-1"><h3 class="font-semibold text-sm">Laporan PDF</h3><p class="text-xs text-slate-500 mt-1">Unduh laporan lengkap kapan saja dibutuhkan.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. SEMUA DALAM SATU PLATFORM ============ -->
+  <section class="max-w-6xl mx-auto px-5 lg:px-8 py-20 text-center">
+    <span class="vh-eyebrow">Semua dalam Satu Platform</span>
+    <h2 class="text-2xl lg:text-3xl font-extrabold">Semua yang Dibutuhkan dalam Satu Platform</h2>
+    <p class="text-slate-500 mt-3 max-w-lg mx-auto">Kelola semua aspek administrasi voucher wifi sekolah dalam satu platform terintegrasi.</p>
+    <div class="vh-eyebrow-rule"></div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-10">
+      <div class="vh-tile"><div class="vh-icon-badge bg-green-50 mx-auto mb-2"><i data-lucide="layout-dashboard" class="text-green-600" style="width:18px;height:18px"></i></div><p class="text-sm font-medium">Dashboard</p></div>
+      <div class="vh-tile"><div class="vh-icon-badge bg-green-50 mx-auto mb-2"><i data-lucide="ticket" class="text-green-600" style="width:18px;height:18px"></i></div><p class="text-sm font-medium">Voucher</p></div>
+      <div class="vh-tile"><div class="vh-icon-badge bg-green-50 mx-auto mb-2"><i data-lucide="package" class="text-green-600" style="width:18px;height:18px"></i></div><p class="text-sm font-medium">Inventory</p></div>
+      <div class="vh-tile"><div class="vh-icon-badge bg-green-50 mx-auto mb-2"><i data-lucide="shopping-cart" class="text-green-600" style="width:18px;height:18px"></i></div><p class="text-sm font-medium">Penjualan</p></div>
+      <div class="vh-tile"><div class="vh-icon-badge bg-green-50 mx-auto mb-2"><i data-lucide="wallet" class="text-green-600" style="width:18px;height:18px"></i></div><p class="text-sm font-medium">Keuangan</p></div>
+      <div class="vh-tile"><div class="vh-icon-badge bg-green-50 mx-auto mb-2"><i data-lucide="map-pin" class="text-green-600" style="width:18px;height:18px"></i></div><p class="text-sm font-medium">Presensi</p></div>
+      <div class="vh-tile"><div class="vh-icon-badge bg-green-50 mx-auto mb-2"><i data-lucide="file-bar-chart" class="text-green-600" style="width:18px;height:18px"></i></div><p class="text-sm font-medium">Laporan</p></div>
+      <div class="vh-tile"><div class="vh-icon-badge bg-green-50 mx-auto mb-2"><i data-lucide="users" class="text-green-600" style="width:18px;height:18px"></i></div><p class="text-sm font-medium">Pengguna</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 6. DASHBOARD PREVIEW ============ -->
+  <section class="vh-bg-mint vh-bg-dot py-20 lg:py-28 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-5 lg:px-8 text-center relative">
+      <span class="vh-eyebrow">Lihat Langsung</span>
+      <h2 class="text-2xl lg:text-3xl font-extrabold">Dashboard yang Informatif &amp; Mudah Dipantau</h2>
+      <p class="text-slate-500 mt-3 max-w-lg mx-auto">Semua data penting sekolah tersaji rapi dalam satu tampilan.</p>
+
+      <div class="relative mt-14 max-w-3xl mx-auto">
+        <!-- Large dashboard mockup -->
+        <div class="rounded-2xl border border-slate-200 bg-white shadow-2xl p-4 text-left">
+          <div class="flex items-center gap-1.5 mb-3 px-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-300"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-300"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-green-300"></span>
+          </div>
+          <div class="rounded-xl bg-slate-50 p-4 grid grid-cols-4 gap-3">
+            <div class="col-span-1 space-y-2 hidden sm:block">
+              <div class="h-3 w-3/4 rounded bg-green-200"></div>
+              <div class="h-2.5 w-full rounded bg-green-100"></div>
+              <div class="h-2.5 w-full rounded bg-slate-200"></div>
+              <div class="h-2.5 w-full rounded bg-slate-200"></div>
+              <div class="h-2.5 w-2/3 rounded bg-slate-200"></div>
+            </div>
+            <div class="col-span-4 sm:col-span-3 space-y-3">
+              <div class="grid grid-cols-4 gap-2">
+                <div class="h-12 rounded-md bg-white border border-slate-200"></div>
+                <div class="h-12 rounded-md bg-white border border-slate-200"></div>
+                <div class="h-12 rounded-md bg-white border border-slate-200"></div>
+                <div class="h-12 rounded-md bg-white border border-slate-200"></div>
+              </div>
+              <div class="grid grid-cols-3 gap-3">
+                <div class="col-span-2 h-24 rounded-md bg-white border border-slate-200 flex items-end p-2 gap-1">
+                  <div class="w-2 bg-green-300 rounded-sm" style="height:35%"></div>
+                  <div class="w-2 bg-green-400 rounded-sm" style="height:65%"></div>
+                  <div class="w-2 bg-green-300 rounded-sm" style="height:25%"></div>
+                  <div class="w-2 bg-green-500 rounded-sm" style="height:85%"></div>
+                  <div class="w-2 bg-green-300 rounded-sm" style="height:50%"></div>
+                  <div class="w-2 bg-green-400 rounded-sm" style="height:60%"></div>
+                  <div class="w-2 bg-green-300 rounded-sm" style="height:40%"></div>
+                </div>
+                <div class="h-24 rounded-md bg-white border border-slate-200"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating info cards -->
+        <div class="vh-preview-card vh-floaty -left-4 lg:-left-14 top-10">
+          <i data-lucide="trending-up" class="text-green-600" style="width:16px;height:16px"></i>
+          <span><strong>+45</strong> Penjualan Hari Ini</span>
+        </div>
+        <div class="vh-preview-card vh-floaty-slow -right-4 lg:-right-16 top-6">
+          <i data-lucide="banknote" class="text-blue-600" style="width:16px;height:16px"></i>
+          <span><strong>Rp2.350.000</strong> Pendapatan</span>
+        </div>
+        <div class="vh-preview-card vh-floaty-slow -left-6 lg:-left-20 bottom-16 hidden sm:flex">
+          <i data-lucide="ticket" class="text-amber-600" style="width:16px;height:16px"></i>
+          <span><strong>1.125</strong> Voucher</span>
+        </div>
+        <div class="vh-preview-card vh-floaty -right-4 lg:-right-14 bottom-20 hidden sm:flex">
+          <i data-lucide="file-down" class="text-violet-600" style="width:16px;height:16px"></i>
+          <span>Export PDF</span>
+        </div>
+        <div class="vh-preview-card vh-floaty bottom-[-1.5rem] left-1/2 -translate-x-1/2 hidden lg:flex">
+          <i data-lucide="user-check" class="text-green-600" style="width:16px;height:16px"></i>
+          <span><strong>50</strong> Anggota Hadir</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. MENGAPA MEMILIH VOUCHERHUB ============ -->
+  <section class="max-w-6xl mx-auto px-5 lg:px-8 py-20 text-center">
+    <span class="vh-eyebrow">Kenapa Memilih VoucherHub?</span>
+    <h2 class="text-2xl lg:text-3xl font-extrabold">Mengapa Memilih VoucherHub?</h2>
+    <div class="vh-eyebrow-rule"></div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 text-left">
+      <div class="vh-why-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="shield-check" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Aman</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Data sekolah terenkripsi dan tersimpan dengan aman.</p>
+      </div>
+      <div class="vh-why-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="zap" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Cepat</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Proses otomatis yang menghemat waktu operasional.</p>
+      </div>
+      <div class="vh-why-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="file-bar-chart" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Laporan Profesional</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Laporan PDF &amp; Excel siap cetak dengan desain rapi.</p>
+      </div>
+      <div class="vh-why-card">
+        <div class="vh-icon-badge bg-green-50 mb-4"><i data-lucide="smartphone" class="text-green-600" style="width:20px;height:20px"></i></div>
+        <h3 class="font-semibold">Responsif</h3>
+        <p class="text-sm text-slate-500 mt-1.5">Dapat diakses kapan saja lewat HP, tablet, atau komputer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. FAQ ============ -->
+  <section class="vh-bg-mint py-20">
+    <div class="max-w-3xl mx-auto px-5 lg:px-8 text-center">
+      <span class="vh-eyebrow">FAQ</span>
+      <h2 class="text-2xl lg:text-3xl font-extrabold">Pertanyaan yang Sering Diajukan</h2>
+      <div class="vh-eyebrow-rule"></div>
+
+      <div class="space-y-3 mt-10 text-left">
+        <div class="vh-faq-item" data-open="false">
+          <button class="vh-faq-q" aria-expanded="false">
+            Siapa yang dapat mengakses Dashboard VoucherHub?
+            <i data-lucide="chevron-down" class="vh-faq-chevron" style="width:18px;height:18px"></i>
+          </button>
+          <div class="vh-faq-a">Dashboard hanya dapat diakses oleh Admin dan Operator yang telah memiliki akun.</div>
+        </div>
+        <div class="vh-faq-item" data-open="false">
+          <button class="vh-faq-q" aria-expanded="false">
+            Di mana bisa mendapatkan voucher WiFi?
+            <i data-lucide="chevron-down" class="vh-faq-chevron" style="width:18px;height:18px"></i>
+          </button>
+          <div class="vh-faq-a">Voucher WiFi dapat diperoleh melalui Admin atau Operator yang bertugas di sekolah.</div>
+        </div>
+        <div class="vh-faq-item" data-open="false">
+          <button class="vh-faq-q" aria-expanded="false">
+            Apakah VoucherHub dapat diakses melalui ponsel?
+            <i data-lucide="chevron-down" class="vh-faq-chevron" style="width:18px;height:18px"></i>
+          </button>
+          <div class="vh-faq-a">Bisa. VoucherHub dirancang responsif sehingga dapat digunakan melalui smartphone, tablet, maupun komputer.</div>
+        </div>
+        <div class="vh-faq-item" data-open="false">
+          <button class="vh-faq-q" aria-expanded="false">
+            Voucher WiFi tersedia dalam berapa varian?
+            <i data-lucide="chevron-down" class="vh-faq-chevron" style="width:18px;height:18px"></i>
+          </button>
+          <div class="vh-faq-a">Voucher tersedia dalam beberapa pilihan paket sesuai kebijakan sekolah, seperti Rp3.000, Rp5.000, Rp10.000, dan paket lainnya jika tersedia.</div>
+        </div>
+        <div class="vh-faq-item" data-open="false">
+          <button class="vh-faq-q" aria-expanded="false">
+            Apakah data saya aman?
+            <i data-lucide="chevron-down" class="vh-faq-chevron" style="width:18px;height:18px"></i>
+          </button>
+          <div class="vh-faq-a">Ya. Data dikelola dengan sistem autentikasi dan penyimpanan yang aman sehingga hanya pengguna yang memiliki izin yang dapat mengaksesnya.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. CTA BANNER ============ -->
+  <section id="tentang" class="max-w-7xl mx-auto px-5 lg:px-8 py-16">
+    <div class="rounded-3xl bg-[var(--green-800)] text-white px-8 py-12 text-center">
+      <h2 class="text-2xl lg:text-3xl font-extrabold">Siap Akses Dashboard?</h2>
+      <p class="text-green-100 mt-2 mb-7">Masuk menggunakan akun yang diberikan oleh Admin.</p>
+      <a href="login.html" class="vh-btn vh-btn-white inline-flex">Masuk Sekarang</a>
+    </div>
+  </section>
+
+  <!-- ============ 10. FOOTER ============ -->
+  <footer id="kontak" class="border-t border-slate-100 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
+      <div class="col-span-2 lg:col-span-1">
+        <a href="index.html" class="flex items-center gap-2 font-bold text-lg mb-3">
+          <i data-lucide="wifi" class="text-green-600" style="width:20px;height:20px"></i>
+          VoucherHub
+        </a>
+        <p class="text-slate-500 text-sm">Sistem administrasi voucher WiFi sekolah yang lengkap, mudah, dan terpercaya.</p>
+        <div class="flex gap-3 mt-4 text-slate-400">
+          <i data-lucide="facebook" style="width:18px;height:18px"></i>
+          <i data-lucide="instagram" style="width:18px;height:18px"></i>
+          <i data-lucide="message-circle" style="width:18px;height:18px"></i>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Navigasi</h4>
+        <ul class="space-y-2 text-slate-500">
+          <li><a href="#beranda" class="hover:text-green-700">Beranda</a></li>
+          <li><a href="#fitur" class="hover:text-green-700">Fitur</a></li>
+          <li><a href="#tentang" class="hover:text-green-700">Tentang</a></li>
+          <li><a href="#kontak" class="hover:text-green-700">Kontak</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Bantuan</h4>
+        <ul class="space-y-2 text-slate-500">
+          <li><a href="#" class="hover:text-green-700">FAQ</a></li>
+          <li><a href="#" class="hover:text-green-700">Panduan</a></li>
+          <li><a href="#" class="hover:text-green-700">Kebijakan Privasi</a></li>
+          <li><a href="#" class="hover:text-green-700">Syarat &amp; Ketentuan</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Kontak</h4>
+        <ul class="space-y-2 text-slate-500">
+          <li>Jl. Pendidikan No. 123, Kota Contoh, 12345</li>
+          <li>(021) 1234-5678</li>
+          <li>info@voucherhub.id</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-200 py-5 text-center text-xs text-slate-400">
+      © 2024 VoucherHub. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="js/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "notifications": [
+    { "type": "warning", "message": "Stok voucher Rp 3.000 tersisa 35 lembar", "time": "2 menit yang lalu" },
+    { "type": "warning", "message": "Presensi hari ini (Senin) belum dilakukan", "time": "15 menit yang lalu" },
+    { "type": "warning", "message": "Generate absensi minggu ke-23 belum dibuat", "time": "1 jam yang lalu" },
+    { "type": "info", "message": "Backup data terakhir 2 hari yang lalu", "time": "3 jam yang lalu" }
+  ]
+}

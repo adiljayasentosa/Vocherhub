@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets — never commit real credentials
+.env
+.env.local
+.env.*.local
+
+# Firebase service account key files, if ever downloaded into the repo
+*serviceAccountKey*.json
+*firebase-adminsdk*.json
+
+# Logs
+npm-debug.log*
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Firebase local emulator / CLI artifacts
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Build/test artifacts
+coverage/
+dist/
+tmp/
+*.tmp

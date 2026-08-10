@@ -1,0 +1,9 @@
+{
+  "stockByNominal": [
+    { "label": "Rp 3.000", "count": 394, "percent": 35 },
+    { "label": "Rp 5.000", "count": 450, "percent": 40 },
+    { "label": "Rp 10.000", "count": 281, "percent": 25 }
+  ],
+  "totalStock": 1125,
+  "totalActive": 2850
+}

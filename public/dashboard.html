@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - VoucherHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+  <div class="min-h-screen lg:grid lg:grid-cols-[240px_1fr]">
+
+    <!-- ============ SIDEBAR (desktop persistent / mobile drawer) ============ -->
+    <aside id="sidebar"
+      class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-100 -translate-x-full transition-transform
+             lg:static lg:translate-x-0 lg:w-auto flex flex-col">
+      <div class="h-16 flex items-center gap-2 px-5 font-bold text-lg border-b border-slate-100">
+        <i data-lucide="wifi" class="text-green-600" style="width:22px;height:22px"></i>
+        VoucherHub
+      </div>
+      <nav class="flex-1 overflow-y-auto p-3 space-y-1">
+        <a href="dashboard.html" class="vh-sidebar-link active">
+          <i data-lucide="layout-dashboard"></i> Dashboard
+        </a>
+        <a href="voucher.html" class="vh-sidebar-link"><i data-lucide="ticket"></i> Voucher <i data-lucide="chevron-right" class="chev ml-auto" style="width:14px;height:14px"></i></a>
+        <a href="penjualan.html" class="vh-sidebar-link"><i data-lucide="shopping-cart"></i> Penjualan <i data-lucide="chevron-right" class="chev ml-auto" style="width:14px;height:14px"></i></a>
+        <a href="presensi.html" class="vh-sidebar-link"><i data-lucide="map-pin"></i> Presensi <i data-lucide="chevron-right" class="chev ml-auto" style="width:14px;height:14px"></i></a>
+        <a href="generate-absensi.html" class="vh-sidebar-link"><i data-lucide="calendar-check-2"></i> Generate Absensi</a>
+        <a href="keuangan.html" class="vh-sidebar-link"><i data-lucide="wallet"></i> Keuangan <i data-lucide="chevron-right" class="chev ml-auto" style="width:14px;height:14px"></i></a>
+        <a href="laporan.html" class="vh-sidebar-link"><i data-lucide="file-bar-chart"></i> Laporan <i data-lucide="chevron-right" class="chev ml-auto" style="width:14px;height:14px"></i></a>
+        <a href="pengguna.html" class="vh-sidebar-link"><i data-lucide="users"></i> Pengguna <i data-lucide="chevron-right" class="chev ml-auto" style="width:14px;height:14px"></i></a>
+        <a href="pengaturan.html" class="vh-sidebar-link"><i data-lucide="settings"></i> Pengaturan <i data-lucide="chevron-right" class="chev ml-auto" style="width:14px;height:14px"></i></a>
+        <a href="log-sistem.html" class="vh-sidebar-link"><i data-lucide="scroll-text"></i> Log Sistem</a>
+      </nav>
+      <div class="p-3 border-t border-slate-100">
+        <button id="logoutBtn" class="vh-sidebar-link w-full text-red-600">
+          <i data-lucide="log-out" class="!text-red-500"></i> Keluar
+        </button>
+      </div>
+    </aside>
+    <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/40 z-40 hidden lg:hidden"></div>
+
+    <!-- ============ MAIN COLUMN ============ -->
+    <div class="min-w-0">
+
+      <!-- Topbar -->
+      <header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-slate-100 h-16 flex items-center justify-between px-5">
+        <button id="sidebarBtn" class="lg:hidden" aria-label="Buka menu">
+          <i data-lucide="menu" style="width:22px;height:22px"></i>
+        </button>
+        <div class="hidden lg:block"></div>
+        <div class="flex items-center gap-4">
+          <button class="relative" aria-label="Notifikasi">
+            <i data-lucide="bell" style="width:20px;height:20px" class="text-slate-500"></i>
+            <span id="notifBadge" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] leading-none rounded-full w-4 h-4 flex items-center justify-center hidden"></span>
+          </button>
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-semibold text-sm" id="userInitials">?</div>
+            <div class="hidden sm:block leading-tight">
+              <p class="text-sm font-semibold" id="userName">-</p>
+              <p class="text-xs text-slate-400" id="userRole">-</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="p-5 lg:p-8 space-y-6">
+        <h1 class="text-2xl font-extrabold">Dashboard</h1>
+        <p class="text-xs text-slate-400 -mt-4">
+          Voucher, Penjualan, Presensi, Keuangan, dan modul lain akan aktif di Phase 3 —
+          statistik di bawah ini sudah dari Firestore langsung.
+        </p>
+
+        <!-- ===== Stat cards ===== -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4" id="statCards"></div>
+
+        <!-- ===== Revenue chart + Notifications ===== -->
+        <div class="grid lg:grid-cols-3 gap-5">
+          <div class="lg:col-span-2 vh-card p-5">
+            <h2 class="font-semibold mb-4">Grafik Pendapatan (7 Hari Terakhir)</h2>
+            <div class="vh-chart-box"><canvas id="revenueChart"></canvas></div>
+          </div>
+          <div class="vh-card p-5">
+            <h2 class="font-semibold mb-4">Notifikasi</h2>
+            <ul class="space-y-4" id="notifList"></ul>
+            <p id="notifEmpty" class="text-sm text-slate-400 hidden">Tidak ada notifikasi saat ini.</p>
+          </div>
+        </div>
+
+        <!-- ===== Recent transactions (full table) ===== -->
+        <div class="vh-card p-5 overflow-x-auto">
+          <h2 class="font-semibold mb-4">Transaksi Terbaru</h2>
+          <table class="vh-table w-full min-w-[520px]">
+            <thead>
+              <tr><th>Waktu</th><th>Kode Voucher</th><th>Nominal</th><th>Operator</th><th>Metode</th><th>Status</th></tr>
+            </thead>
+            <tbody id="txTableBody"></tbody>
+          </table>
+          <p id="txEmpty" class="text-sm text-slate-400 mt-3 hidden">Belum ada transaksi.</p>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

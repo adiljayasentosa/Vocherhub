@@ -1,0 +1,59 @@
+{
+  "stats": {
+    "pendapatanHariIni": { "value": 2350000, "changePercent": 12.8, "changeDirection": "up" },
+    "penjualanHariIni": { "value": 45, "unit": "Transaksi", "changePercent": 8.2, "changeDirection": "up" },
+    "stokVoucher": { "value": 1125, "unit": "Voucher", "change": -120, "changeDirection": "down" },
+    "voucherAktif": { "value": 2850, "unit": "Voucher", "changePercent": 15.3, "changeDirection": "up" },
+    "saldoSaatIni": { "value": 8750000 }
+  },
+  "revenueChart": {
+    "labels": ["27 Mei", "28 Mei", "29 Mei", "30 Mei", "31 Mei", "1 Jun", "2 Jun"],
+    "values": [1800000, 3600000, 1200000, 3400000, 1500000, 1100000, 3500000]
+  },
+  "salesChart30Days": {
+    "labels": ["5 Mei", "10 Mei", "15 Mei", "20 Mei", "25 Mei", "30 Mei", "3 Jun"],
+    "values": [42, 68, 55, 90, 40, 72, 60, 35, 80, 50, 65, 30, 75, 45]
+  },
+  "stockByNominal": [
+    { "label": "Rp 3.000", "count": 394, "percent": 35, "color": "#16a34a" },
+    { "label": "Rp 5.000", "count": 450, "percent": 40, "color": "#4ade80" },
+    { "label": "Rp 10.000", "count": 281, "percent": 25, "color": "#dc2626" }
+  ],
+  "totalStock": 1125,
+  "attendanceToday": {
+    "label": "Senin, 3 Juni 2024",
+    "totalAnggota": 50,
+    "breakdown": [
+      { "label": "Hadir", "count": 38, "percent": 76, "color": "#16a34a" },
+      { "label": "Izin", "count": 5, "percent": 10, "color": "#3b82f6" },
+      { "label": "Sakit", "count": 2, "percent": 4, "color": "#f59e0b" },
+      { "label": "Alpa", "count": 5, "percent": 10, "color": "#dc2626" }
+    ]
+  },
+  "financeSummary": {
+    "period": "Bulan Ini",
+    "totalPemasukan": 15250000,
+    "totalPengeluaran": 6500000,
+    "saldoAwal": 1000000,
+    "saldoAkhir": 9750000
+  },
+  "notifications": [
+    { "type": "warning", "message": "Stok voucher Rp 3.000 tersisa 35 lembar", "time": "2 menit yang lalu" },
+    { "type": "warning", "message": "Presensi hari ini (Senin) belum dilakukan", "time": "15 menit yang lalu" },
+    { "type": "warning", "message": "Generate absensi minggu ke-23 belum dibuat", "time": "1 jam yang lalu" },
+    { "type": "info", "message": "Backup data terakhir 2 hari yang lalu", "time": "3 jam yang lalu" }
+  ],
+  "recentTransactions": [
+    { "waktu": "3 Jun 2024, 10:15", "kode": "VCH-20240603-0045", "nominal": 10000, "operator": "Budi", "metode": "Tunai", "status": "Selesai" },
+    { "waktu": "3 Jun 2024, 10:10", "kode": "VCH-20240603-0044", "nominal": 5000, "operator": "Siti", "metode": "Tunai", "status": "Selesai" },
+    { "waktu": "3 Jun 2024, 09:45", "kode": "VCH-20240603-0043", "nominal": 10000, "operator": "Andi", "metode": "Tunai", "status": "Selesai" },
+    { "waktu": "3 Jun 2024, 09:30", "kode": "VCH-20240603-0042", "nominal": 5000, "operator": "Budi", "metode": "Tunai", "status": "Selesai" },
+    { "waktu": "3 Jun 2024, 09:15", "kode": "VCH-20240603-0041", "nominal": 10000, "operator": "Siti", "metode": "Tunai", "status": "Selesai" }
+  ],
+  "quickActions": [
+    { "label": "Generate Voucher", "icon": "ticket" },
+    { "label": "Jual Voucher", "icon": "shopping-cart" },
+    { "label": "Presensi Hari Ini", "icon": "calendar-check", "sublabel": "Senin, 3 Juni" },
+    { "label": "Tambah Pengeluaran", "icon": "wallet" }
+  ]
+}
