@@ -5,6 +5,8 @@
     { "src": "public/**", "use": "@vercel/static" }
   ],
   "routes": [
+    { "src": "/sw.js", "headers": { "Cache-Control": "no-cache, no-store, must-revalidate" }, "dest": "/public/sw.js" },
+    { "src": "/version.json", "headers": { "Cache-Control": "no-cache, no-store, must-revalidate" }, "dest": "/public/version.json" },
     { "src": "/api/(.*)", "dest": "/api/index.js" },
     { "src": "/(.*)", "dest": "/public/$1" }
   ]
